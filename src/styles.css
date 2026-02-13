@@ -1,20 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
+
 :root {
-    --cs2-orange: #de9b35;
-    --cs2-blue-dark: #1b1e23;
-    --cs2-blue-medium: #2d323b;
-    --cs2-text-light: #e1e1e1;
-    --cs2-text-muted: #8b9bb4;
-    --font-family-base: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --leet-bg: #0e0c0f;
+    --leet-surface: #1a161d;
+    --leet-surface-light: #251f2a;
+    --leet-accent: #f82c8d;
+    --leet-accent-hover: #d62276;
+    --leet-text: #ffffff;
+    --leet-text-muted: #a39eb0;
+    --leet-border: rgba(255, 255, 255, 0.08);
+    --font-family-base: 'Outfit', sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--cs2-blue-dark);
-    color: var(--cs2-text-light);
+    background-color: var(--leet-bg);
+    color: var(--leet-text);
     font-family: var(--font-family-base);
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
 }
 
 h1,
@@ -43,14 +50,14 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--cs2-blue-dark);
+    background: var(--leet-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--cs2-blue-medium);
+    background: var(--leet-surface-light);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--cs2-orange);
+    background: var(--leet-accent);
 }

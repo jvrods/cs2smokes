@@ -1,6 +1,6 @@
 .detail-container {
-    padding: 2rem;
-    max-width: 1200px;
+    padding: 3rem 2rem;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -9,62 +9,66 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     margin-bottom: 3rem;
-    border-bottom: 2px solid rgba(222, 155, 53, 0.3);
-    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--leet-border);
+    padding-bottom: 1.5rem;
 }
 
 .detail-header h1 {
     grid-column: 2;
-    color: #fff;
+    color: var(--leet-text);
     margin: 0;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    color: #de9b35;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-align: center;
 }
 
 .back-btn {
     grid-column: 1;
     justify-self: start;
-    /* ... existing styles ... */
-    color: #fff;
+    color: var(--leet-text);
     text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid var(--leet-border);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    background: var(--leet-surface);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .back-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #de9b35;
-    color: #de9b35;
+    background: var(--leet-surface-light);
+    border-color: var(--leet-accent);
+    color: var(--leet-accent);
 }
 
 .smoke-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
 }
 
 .smoke-card {
-    background: rgba(27, 30, 35, 0.8);
-    border-radius: 8px;
+    background: var(--leet-surface);
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease;
+    border: 1px solid var(--leet-border);
+    transition: all 0.3s ease;
 }
 
 .smoke-card:hover {
-    transform: translateY(-5px);
-    border-color: #de9b35;
+    border-color: var(--leet-accent);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .smoke-media {
-    height: 200px;
+    height: 220px;
     position: relative;
     background: #000;
+    border-bottom: 1px solid var(--leet-border);
 }
 
 .smoke-media img,
@@ -77,20 +81,23 @@
 
 .smoke-type-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: bold;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
     text-transform: uppercase;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(14, 12, 15, 0.9);
+    color: var(--leet-text);
+    border: 1px solid var(--leet-border);
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(4px);
 }
 
 .smoke-type-badge.smoke {
-    border-color: #ccc;
+    border-color: var(--leet-accent);
+    color: var(--leet-accent);
 }
 
 .smoke-content {
@@ -99,23 +106,28 @@
 
 .smoke-content h3 {
     margin: 0 0 0.5rem 0;
-    color: #de9b35;
+    color: var(--leet-text);
     font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .smoke-content p {
-    color: #ccc;
+    color: var(--leet-text-muted);
     margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .no-smokes {
     grid-column: 1 / -1;
     text-align: center;
-    color: #888;
-    font-size: 1.2rem;
-    padding: 4rem;
+    color: var(--leet-text-muted);
+    font-size: 1.25rem;
+    padding: 6rem 2rem;
+    background: var(--leet-surface);
+    border-radius: 12px;
+    border: 1px dashed var(--leet-border);
 }
 
 @media (max-width: 768px) {
@@ -124,6 +136,10 @@
     }
 
     .detail-header h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+    }
+
+    .smoke-grid {
+        grid-template-columns: 1fr;
     }
 }

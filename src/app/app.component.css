@@ -6,27 +6,35 @@
 
 .app-header {
     background-color: rgba(20, 22, 26, 0.95);
-    padding: 1.5rem 2rem;
-    border-bottom: 3px solid #de9b35;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.app-header h1 {
-    margin: 0;
-    font-size: 2rem;
-    color: #fff;
-    letter-spacing: 2px;
-    font-weight: 800;
-    text-shadow: 0 0 10px rgba(222, 155, 53, 0.5);
+    background: var(--leet-surface);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--leet-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--leet-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 24px;
+    background: var(--leet-accent);
+    border-radius: 2px;
 }
 
 main {
@@ -34,10 +42,10 @@ main {
 }
 
 .app-footer {
-    background-color: #14161a;
-    color: #8b9bb4;
-    text-align: center;
+    background: var(--leet-bg);
+    color: var(--leet-text-muted);
     padding: 2rem;
-    margin-top: 4rem;
-    border-top: 1px solid #2d323b;
+    text-align: center;
+    font-size: 0.875rem;
+    border-top: 1px solid var(--leet-border);
 }

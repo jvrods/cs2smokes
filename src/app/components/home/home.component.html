@@ -1,6 +1,7 @@
 <div class="home-container">
     <div class="hero">
         <h2>SELECT A MAP</h2>
+        <p>Choose a map to explore smoke strategies and improve your match performance.</p>
     </div>
 
     <div class="map-grid" *ngIf="maps$ | async as maps">
@@ -11,6 +12,7 @@
             </div>
             <div class="card-content">
                 <h3>{{ map.name }}</h3>
+                <span class="card-badge">Active Duty</span>
             </div>
         </a>
     </div>
