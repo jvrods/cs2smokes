@@ -1,0 +1,27 @@
+<div class="detail-container" *ngIf="map$ | async as map">
+    <div class="detail-header">
+        <a routerLink="/" class="back-btn">&larr; Back to Maps</a>
+        <h1>{{ map.name }} Smokes</h1>
+    </div>
+
+    <div class="smoke-grid" *ngIf="smokes$ | async as smokes">
+        <div *ngFor="let smoke of smokes" class="smoke-card">
+            <div class="smoke-media">
+                <iframe *ngIf="smoke.videoUrl" [src]="smoke.videoUrl | youtubeEmbed | safeUrl"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+                <img *ngIf="!smoke.videoUrl" [src]="smoke.imageUrl" [alt]="smoke.title"
+                    onerror="this.src='https://placehold.co/600x400/1b1e23/de9b35?text=Smoke+Lineup'">
+                <div class="smoke-type-badge" [ngClass]="smoke.type">{{ smoke.type }}</div>
+            </div>
+            <div class="smoke-content">
+                <h3>{{ smoke.title }}</h3>
+                <p>{{ smoke.description }}</p>
+            </div>
+        </div>
+        <div *ngIf="smokes.length === 0" class="no-smokes">
+            <p>No smokes found for this map yet.</p>
+        </div>
+    </div>
+</div>
