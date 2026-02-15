@@ -1,0 +1,185 @@
+<div class="admin-wrapper">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>CS2 ADMIN</h2>
+        </div>
+        <nav>
+            <button [class.active]="viewMode === 'add-content'" (click)="switchMode('add-content')">
+                <span class="icon">+</span> Add Nade
+            </button>
+            <button [class.active]="viewMode === 'manage-maps'" (click)="switchMode('manage-maps')">
+                <span class="icon">🖼️</span> Manage Maps
+            </button>
+            <button [class.active]="viewMode === 'edit-nades'" (click)="switchMode('edit-nades')">
+                <span class="icon">✏️</span> Edit Nades
+            </button>
+            <button (click)="logout()" class="logout-btn">
+                <span class="icon">🚪</span> Logout
+            </button>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- HEADER -->
+        <header>
+            <h1>
+                <ng-container *ngIf="viewMode === 'add-content'">Add New Nade</ng-container>
+                <ng-container *ngIf="viewMode === 'manage-maps'">Manage Maps</ng-container>
+                <ng-container *ngIf="viewMode === 'edit-nades'">Edit Nades</ng-container>
+            </h1>
+        </header>
+
+        <!-- ADD CONTENT FORM -->
+        <div *ngIf="viewMode === 'add-content'" class="form-card">
+            <form (ngSubmit)="onSubmit()" #smokeForm="ngForm">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" [(ngModel)]="smoke.title" name="title" required
+                        placeholder="Ex: Mirage Window Smoke">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Map</label>
+                        <select [(ngModel)]="smoke.mapId" name="mapId" required>
+                            <option *ngFor="let map of maps$ | async" [value]="map.id">{{ map.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select [(ngModel)]="smoke.type" name="type" required>
+                            <option value="smoke">Smoke</option>
+                            <option value="molotov">Molotov</option>
+                            <option value="flash">Flash</option>
+                            <option value="grenade">Grenade</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Video URL (YouTube)</label>
+                    <input type="text" [(ngModel)]="smoke.videoUrl" name="videoUrl" placeholder="https://youtu.be/...">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea [(ngModel)]="smoke.description" name="description" rows="4"></textarea>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" [disabled]="!smokeForm.form.valid || isSubmitting" class="submit-btn">
+                        {{ isSubmitting ? 'Saving...' : 'Save' }}
+                    </button>
+                </div>
+                <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+                <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+            </form>
+        </div>
+
+        <!-- MANAGE MAPS FORM -->
+        <div *ngIf="viewMode === 'manage-maps'" class="form-card">
+            <div class="media-selectors">
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Select Map</label>
+                    <select [ngModel]="selectedMap?.id" (ngModelChange)="onMapSelect($event)">
+                        <option [value]="null" disabled selected>Choose a map...</option>
+                        <option *ngFor="let map of maps$ | async" [value]="map.id">{{ map.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="selectedMap" class="media-upload-area">
+                <h4>Updating Map: <span>{{ selectedMap.name }}</span></h4>
+
+                <div class="current-preview" *ngIf="selectedMap.image">
+                    <p>Current Card Image:</p>
+                    <img [src]="selectedMap.image" alt="Map Preview">
+                </div>
+
+                <div class="form-group">
+                    <label>Upload New Card Image</label>
+                    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                    <div *ngIf="selectedFile" class="file-info">
+                        <span>Selected: {{ selectedFile.name }}</span>
+                        <button type="button" (click)="removeFile()" class="remove-file-btn">Remove</button>
+                    </div>
+                    <p class="hint">Or paste URL:</p>
+                    <input type="text" [(ngModel)]="selectedMap.image" name="mapImage" placeholder="https://...">
+                </div>
+
+                <button (click)="onSubmit()" [disabled]="isSubmitting" class="submit-btn">
+                    {{ isSubmitting ? 'Uploading...' : 'Update Map' }}
+                </button>
+
+                <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+                <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+            </div>
+
+            <div *ngIf="!selectedMap" class="empty-state">
+                <p>Select a map to edit its card image.</p>
+            </div>
+        </div>
+
+        <!-- EDIT NADES FORM -->
+        <div *ngIf="viewMode === 'edit-nades'" class="form-card">
+            <div class="media-selectors">
+                <div class="form-group">
+                    <label>1. Select Map</label>
+                    <select [(ngModel)]="selectedMapForEdit" (change)="onEditMapSelect()">
+                        <option value="" disabled selected>Choose a map...</option>
+                        <option *ngFor="let map of maps$ | async" [value]="map.id">{{ map.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group" *ngIf="selectedMapForEdit">
+                    <label>2. Select Nade</label>
+                    <select [(ngModel)]="selectedSmokeForEdit" (change)="onEditSmokeSelect()">
+                        <option [ngValue]="null" disabled selected>Choose a nade...</option>
+                        <option *ngFor="let s of filteredSmokesForEdit$ | async" [ngValue]="s">{{ s.title }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="selectedSmokeForEdit" class="edit-nade-area">
+                <form (ngSubmit)="onSubmit()" #editSmokeForm="ngForm">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" [(ngModel)]="smoke.title" name="editTitle" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea [(ngModel)]="smoke.description" name="editDescription" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Video URL</label>
+                        <input type="text" [(ngModel)]="smoke.videoUrl" name="editVideoUrl">
+                    </div>
+
+                    <div class="actions" style="margin-top: 20px;">
+                        <button type="submit" [disabled]="!editSmokeForm.form.valid || isSubmitting" class="submit-btn"
+                            style="flex: 1;">
+                            {{ isSubmitting ? 'Saving...' : 'Update Nade' }}
+                        </button>
+                        <button type="button" (click)="deleteSmoke()" class="submit-btn"
+                            style="background-color: #f75a68; flex: 1;">
+                            Delete Nade
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+            <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+            <div *ngIf="!selectedSmokeForEdit && selectedMapForEdit && !successMessage" class="empty-state">
+                <p>Select a nade to edit.</p>
+            </div>
+        </div>
+
+    </main>
+</div>

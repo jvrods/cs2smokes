@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { SmokeService, Map } from '../../services/smoke.service';
+import { SmokeService } from '../../services/smoke.service';
+import { Map as GameMap } from '../../models/smoke.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  maps$: Observable<Map[]>;
+  maps$: Observable<GameMap[]>;
 
   constructor(private smokeService: SmokeService) {
     this.maps$ = this.smokeService.getMaps();
@@ -21,3 +22,4 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 }
+

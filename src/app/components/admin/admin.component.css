@@ -1,0 +1,215 @@
+/* Global Admin Styles */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--leet-bg);
+    color: var(--leet-text);
+    font-family: var(--font-family-base);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--leet-surface);
+    border-right: 1px solid var(--leet-border);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.logo h2 {
+    color: var(--leet-accent);
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar nav button {
+    background: transparent;
+    border: none;
+    color: var(--leet-text-muted);
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+}
+
+.sidebar nav button:hover {
+    color: var(--leet-text);
+    background-color: var(--leet-surface-light);
+}
+
+.sidebar nav button.active {
+    background-color: var(--leet-accent);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.logout-btn {
+    margin-top: auto;
+    color: #f75a68 !important;
+}
+
+.logout-btn:hover {
+    background-color: rgba(247, 90, 104, 0.1) !important;
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--leet-text);
+}
+
+/* Form Cards */
+.form-card {
+    background-color: var(--leet-surface);
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 800px;
+    border: 1px solid var(--leet-border);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--leet-text-muted);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    background-color: var(--leet-bg);
+    border: 1px solid var(--leet-border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: var(--leet-text);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--leet-accent);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Buttons */
+.submit-btn {
+    width: 100%;
+    background-color: var(--leet-accent);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: var(--leet-accent-hover);
+}
+
+.submit-btn:disabled {
+    background-color: var(--leet-surface-light);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Media Manager Specifics */
+.media-selectors {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--leet-border);
+    margin-bottom: 20px;
+}
+
+.media-upload-area h4 {
+    color: var(--leet-text);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.media-upload-area h4 span {
+    color: var(--leet-accent);
+    font-weight: 700;
+}
+
+.current-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 6px;
+    border: 2px solid var(--leet-border);
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.hint {
+    color: var(--leet-text-muted);
+    font-size: 0.8rem;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+
+.success {
+    color: #4cd62b;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    background: rgba(76, 214, 43, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.error {
+    color: #e83f5b;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    background: rgba(232, 63, 91, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--leet-text-muted);
+    padding: 40px;
+    font-style: italic;
+}

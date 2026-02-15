@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SmokeService } from '../../services/smoke.service';
 import { Smoke, Map } from '../../models/smoke.model';
-import { Observable, switchMap, map } from 'rxjs';
+import { Observable, switchMap, map, tap } from 'rxjs';
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 import { YoutubeEmbedPipe } from '../../pipes/youtube-embed.pipe';
 
@@ -17,16 +17,18 @@ import { YoutubeEmbedPipe } from '../../pipes/youtube-embed.pipe';
 export class MapDetailComponent implements OnInit {
   smokes$: Observable<Smoke[]>;
   map$: Observable<Map | undefined>;
-  mapId: string | null = null;
+  mapId$: Observable<string | null>;
 
   constructor(
     private route: ActivatedRoute,
     private smokeService: SmokeService
   ) {
+    this.mapId$ = this.route.paramMap.pipe(map(params => params.get('id')));
+
     this.smokes$ = this.route.paramMap.pipe(
       switchMap(params => {
-        this.mapId = params.get('id');
-        return this.smokeService.getSmokes(this.mapId!);
+        const id = params.get('id');
+        return this.smokeService.getSmokes(id!);
       })
     );
 

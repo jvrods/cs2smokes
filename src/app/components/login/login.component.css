@@ -1,0 +1,123 @@
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #1b1e23;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    text-align: center;
+    color: #f82c8d;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #de9b35;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px;
+    /* Make room for the eye icon */
+    background: #2a2e35;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Ensure padding doesn't affect width */
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    width: auto;
+    /* Override default button width */
+    margin: 0;
+}
+
+.toggle-password:hover {
+    background: none;
+    color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #c2185b;
+}
+
+button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #ff5252;
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+.google-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.google-btn {
+    background: white;
+    margin-top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.google-btn:hover {
+    background: #f1f1f1;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.google-btn svg {
+    width: 24px;
+    height: 24px;
+}

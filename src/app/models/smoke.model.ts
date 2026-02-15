@@ -10,6 +10,6 @@ export interface Smoke {
     title: string;
     description: string;
     videoUrl?: string;
-    imageUrl: string;
+    imageUrl?: string;
     type: 'smoke' | 'flash' | 'molotov' | 'grenade';
 }
